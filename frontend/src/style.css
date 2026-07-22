@@ -1,5 +1,11 @@
-body {
+* {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-color: darkgrey;
+}
+#game-container
+{
+
+  background-color: rgb(169, 169, 169);
 }
