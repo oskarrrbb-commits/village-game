@@ -11,3 +11,6 @@ of truth both sides code against.
 ## Data shapes
 
 (to be filled in as we build)
+
+
+siema kurwy 
