@@ -13,7 +13,7 @@ export class VillageScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image('grass', 'assets/grass.png');
+    this.load.image('grass', 'assets/trawa.png');
     this.load.image('border', 'assets/border.png');
   }
 
