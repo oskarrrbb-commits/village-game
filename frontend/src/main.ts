@@ -3,7 +3,7 @@ import { VillageScene } from './scenes/VillageScene';
 
 new Phaser.Game({
   type: Phaser.AUTO,
-  width: 1024,
+  width: 1440,
   height: 768,
   parent: 'game-container',
   backgroundColor: '#2d2d2d',
