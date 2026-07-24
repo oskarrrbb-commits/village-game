@@ -12,4 +12,7 @@ export class Farm extends Building {
   getSpriteKey(): string {
     return 'farm';
   }
+  produce(): { type: 'wheat'; amount: number } {
+    return { type: 'wheat', amount: 1 };
+  }
 }

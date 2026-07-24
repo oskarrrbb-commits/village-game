@@ -28,6 +28,16 @@ export class VillageScene extends Phaser.Scene {
 
     this.edgeScroll = new EdgeScrollCamera(this);
     new BuildingPlacer(this, this.village).enable();
+    
+    this.time.addEvent({
+    delay: 1000,
+    callback: () =>{
+    this.village.tick();
+    console.log('wheat:', this.village.resources.get('wheat'));
+    },
+    loop: true,
+    });
+
   }
 
   update(): void {
