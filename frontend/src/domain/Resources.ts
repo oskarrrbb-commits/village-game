@@ -1,6 +1,6 @@
 import type { ResourceDrop } from './Building.ts';
 
-export type ResourceType = 'wheat'|'coal';
+export type ResourceType = 'wheat'|'coal'|'wood';
 
 export class Resources {
   private amounts: Record<string, number> = {};
