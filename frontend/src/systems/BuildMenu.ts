@@ -10,6 +10,8 @@ const MENU_ENTRIES: MenuEntry[] = [
   { label: 'House', buildingKey: 'house' },
   { label: 'Farm', buildingKey: 'farm' },
   { label: 'Mine', buildingKey: 'mine' },
+  { label: 'Nothing', buildingKey: '' },
+
 ];
 
 export class BuildMenu {
