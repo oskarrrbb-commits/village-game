@@ -5,6 +5,7 @@ import { EdgeScrollCamera } from '../systems/ScrollCamera';
 import { loadAllAssets } from '../systems/AssetLoad.ts';
 import { BuildingPlacer } from '../systems/BuildingPlacer';
 import { GridRenderer, TILE_SIZE } from '../systems/GridRenderer';
+import { BuildMenu } from '../systems/BuildMenu.ts';
 
 export class VillageScene extends Phaser.Scene {
   private gridMap = new GridMap(40, 30);
@@ -23,10 +24,9 @@ export class VillageScene extends Phaser.Scene {
     new GridRenderer(this, this.gridMap).render();
     const placer = new BuildingPlacer(this, this.village);
     placer.enable();
-    this.input.keyboard!.on('keydown-ONE', () => placer.selectType(''));
-    this.input.keyboard!.on('keydown-TWO', () => placer.selectType('house'));
-    this.input.keyboard!.on('keydown-THREE', () => placer.selectType('farm'));
-    this.input.keyboard!.on('keydown-FOUR', () => placer.selectType('mine'));
+    const buildMenu = new BuildMenu(this, placer);
+    buildMenu.create();
+
     const worldWidth = this.gridMap.width * TILE_SIZE;
     const worldHeight = this.gridMap.height * TILE_SIZE;
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
