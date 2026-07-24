@@ -8,3 +8,8 @@ export class House extends Building {
     return 'house';
   }
 }
+export class Farm extends Building {
+  getSpriteKey(): string {
+    return 'farm';
+  }
+}

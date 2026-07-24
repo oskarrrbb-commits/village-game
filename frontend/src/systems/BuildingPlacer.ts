@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import { Village } from '../domain/Village';
-import { House } from '../domain/Building';
+import { Village } from '../domain/Village.ts';
+import { Building, House, Farm } from '../domain/Building.ts';
 import { TILE_SIZE } from './GridRenderer';
 
 export class BuildingPlacer {
@@ -17,13 +17,19 @@ export class BuildingPlacer {
         return;
       }
 
-      const house = new House(gridX, gridY);
-      this.village.addBuilding(house);
+      let building: Building;
+      if (gridX > 10) {
+        building = new Farm(gridX, gridY);
+      } else {
+        building = new House(gridX, gridY);
+      }
+
+      this.village.addBuilding(building);
 
       const img = this.scene.add.image(
         gridX * TILE_SIZE + TILE_SIZE / 2,
         gridY * TILE_SIZE + TILE_SIZE / 2,
-        house.getSpriteKey()
+        building.getSpriteKey()
       );
       img.setDisplaySize(TILE_SIZE, TILE_SIZE);
     });
