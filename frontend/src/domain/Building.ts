@@ -24,3 +24,12 @@ export class Farm extends Building {
   }
   
 }
+export class Mine extends Building {
+  getSpriteKey(): string {
+    return 'mine';
+  }
+  produce(): ResourceDrop | null {
+    return { type: 'coal', amount: 1 };
+  }
+  
+}

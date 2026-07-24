@@ -26,21 +26,22 @@ export class VillageScene extends Phaser.Scene {
 
     this.input.keyboard!.on('keydown-ONE', () => placer.selectType('house'));
     this.input.keyboard!.on('keydown-TWO', () => placer.selectType('farm'));
+    this.input.keyboard!.on('keydown-THREE', () => placer.selectType('mine'));
     const worldWidth = this.gridMap.width * TILE_SIZE;
     const worldHeight = this.gridMap.height * TILE_SIZE;
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
 
     this.edgeScroll = new EdgeScrollCamera(this);
     new BuildingPlacer(this, this.village).enable();
-    
-    const wheatText = this.add.text(100, 100, `Wheat: ${this.village.resources.get('wheat')}`);
-    wheatText.setScrollFactor(0);
+
+    const ResourceText = this.add.text(100, 100, `Wheat: ${this.village.resources.get('wheat')}`);
+    ResourceText.setScrollFactor(0);
 
     this.time.addEvent({
     delay: 1000,
     callback: () =>{
     this.village.tick();
-    wheatText.setText(`Wheat: ${this.village.resources.get('wheat')}`);
+    ResourceText.setText(`Wheat: ${this.village.resources.get('wheat')} \nCoal: ${this.village.resources.get('coal')}`);
     },
     loop: true,
     });

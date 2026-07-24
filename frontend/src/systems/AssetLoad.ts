@@ -13,6 +13,7 @@ export const TILE_ASSETS: AssetEntry[] = [
 export const BUILDING_ASSETS: AssetEntry[] = [
   { key: 'house', path: 'assets/house.png' },
   { key: 'farm', path: 'assets/farm.png' },
+  { key: 'mine', path: 'assets/mine.png' },
 ];
 
 export function loadAllAssets(scene: Phaser.Scene): void {
