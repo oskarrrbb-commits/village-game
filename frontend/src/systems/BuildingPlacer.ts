@@ -1,10 +1,16 @@
 import Phaser from 'phaser';
-import { Village } from '../domain/Village.ts';
-import { Building, House, Farm } from '../domain/Building.ts';
+import { Village } from '../domain/Village';
+import { createBuilding } from '../domain/BuildingRegistry';
 import { TILE_SIZE } from './GridRenderer';
 
 export class BuildingPlacer {
+  private selectedType = 'house'; 
+
   constructor(private scene: Phaser.Scene, private village: Village) {}
+
+  selectType(key: string): void {
+    this.selectedType = key;
+  }
 
   enable(): void {
     this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
@@ -17,13 +23,7 @@ export class BuildingPlacer {
         return;
       }
 
-      let building: Building;
-      if (gridX > 10) {
-        building = new Farm(gridX, gridY);
-      } else {
-        building = new House(gridX, gridY);
-      }
-
+      const building = createBuilding(this.selectedType, gridX, gridY);
       this.village.addBuilding(building);
 
       const img = this.scene.add.image(
