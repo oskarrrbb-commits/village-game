@@ -1,4 +1,4 @@
-import { Building, Farm } from './Building';
+import { Building } from './Building';
 import { Resources } from './Resources';
 
 export class Village {
@@ -15,9 +15,9 @@ export class Village {
 
   tick(): void {
     for (const building of this.buildings) {
-      if (building instanceof Farm) {
-        const { type, amount } = building.produce();
-        this.resources.add(type, amount);
+      const drop = building.produce();
+      if (drop) {
+        this.resources.add(drop.type, drop.amount);
       }
     }
   }

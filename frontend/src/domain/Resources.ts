@@ -1,15 +1,13 @@
 export type ResourceType = 'wheat';
 
 export class Resources {
-  private amounts: Record<ResourceType, number> = {
-    wheat: 0,
-  };
+  private amounts: Record<string, number> = {};
 
-  add(type: ResourceType, amount: number): void {
-    this.amounts[type] += amount;
+  add(type: string, amount: number): void {
+    this.amounts[type] = (this.amounts[type] ?? 0) + amount;
   }
 
-  get(type: ResourceType): number {
-    return this.amounts[type];
+  get(type: string): number {
+    return this.amounts[type] ?? 0;
   }
 }

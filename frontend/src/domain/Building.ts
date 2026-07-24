@@ -1,6 +1,13 @@
+export interface ResourceDrop {
+  type: string;
+  amount: number;
+}
 export abstract class Building {
   constructor(public gridX: number, public gridY: number) {}
   abstract getSpriteKey(): string;
+  produce(): ResourceDrop | null {
+    return null;   
+  }
 }
 
 export class House extends Building {
@@ -12,7 +19,8 @@ export class Farm extends Building {
   getSpriteKey(): string {
     return 'farm';
   }
-  produce(): { type: 'wheat'; amount: number } {
+  produce(): ResourceDrop | null {
     return { type: 'wheat', amount: 1 };
   }
+  
 }
