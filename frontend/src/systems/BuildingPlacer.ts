@@ -4,7 +4,7 @@ import { createBuilding } from '../domain/BuildingRegistry';
 import { TILE_SIZE } from './GridRenderer';
 
 export class BuildingPlacer {
-  private selectedType = 'house'; 
+  private selectedType = ''; 
 
   constructor(private scene: Phaser.Scene, private village: Village) {}
 
