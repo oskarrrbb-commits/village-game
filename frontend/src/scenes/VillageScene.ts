@@ -23,10 +23,10 @@ export class VillageScene extends Phaser.Scene {
     new GridRenderer(this, this.gridMap).render();
     const placer = new BuildingPlacer(this, this.village);
     placer.enable();
-
-    this.input.keyboard!.on('keydown-ONE', () => placer.selectType('house'));
-    this.input.keyboard!.on('keydown-TWO', () => placer.selectType('farm'));
-    this.input.keyboard!.on('keydown-THREE', () => placer.selectType('mine'));
+    this.input.keyboard!.on('keydown-ONE', () => placer.selectType(''));
+    this.input.keyboard!.on('keydown-TWO', () => placer.selectType('house'));
+    this.input.keyboard!.on('keydown-THREE', () => placer.selectType('farm'));
+    this.input.keyboard!.on('keydown-FOUR', () => placer.selectType('mine'));
     const worldWidth = this.gridMap.width * TILE_SIZE;
     const worldHeight = this.gridMap.height * TILE_SIZE;
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);

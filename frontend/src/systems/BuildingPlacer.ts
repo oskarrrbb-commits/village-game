@@ -14,6 +14,9 @@ export class BuildingPlacer {
 
   enable(): void {
     this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+    if (!this.selectedType) {
+      return;
+    }
       const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
       const gridX = Math.floor(worldPoint.x / TILE_SIZE);
       const gridY = Math.floor(worldPoint.y / TILE_SIZE);
@@ -22,8 +25,16 @@ export class BuildingPlacer {
         console.log('Tile already occupied');
         return;
       }
-
       const building = createBuilding(this.selectedType, gridX, gridY);
+
+      const cost = building.getCost();
+
+      if (!this.village.resources.canAfford(cost)) {
+      console.log('Not enough resources');
+      return;
+      }
+      this.village.resources.spend(cost);
+
       this.village.addBuilding(building);
 
       const img = this.scene.add.image(
