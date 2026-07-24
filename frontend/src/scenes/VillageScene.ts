@@ -14,6 +14,7 @@ export class VillageScene extends Phaser.Scene {
 
   constructor() {
     super('VillageScene');
+    this.village.resources.add('wood', 50);
   }
 
   preload(): void {
@@ -42,7 +43,7 @@ export class VillageScene extends Phaser.Scene {
     delay: 1000,
     callback: () =>{
     this.village.tick();
-    ResourceText.setText(`Wheat: ${this.village.resources.get('wheat')} \nCoal: ${this.village.resources.get('coal')}`);
+    ResourceText.setText(`Wheat: ${this.village.resources.get('wheat')} \nCoal: ${this.village.resources.get('coal')}\nWood: ${this.village.resources.get('wood')}`);
     },
     loop: true,
     });

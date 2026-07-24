@@ -25,7 +25,7 @@ export class Farm extends Building {
   produce(): ResourceDrop | null {
     return { type: 'wheat', amount: 1 };
   }
-  getCost(): ResourceDrop[] { return []; }
+  getCost(): ResourceDrop[] { return [{ type: 'wood', amount: 5 }]; }
 
 }
 export class Mine extends Building {
@@ -35,6 +35,16 @@ export class Mine extends Building {
   produce(): ResourceDrop | null {
     return { type: 'coal', amount: 1 };
   }
-  getCost(): ResourceDrop[] { return [{ type: 'wheat', amount: 5 }]; }
+  getCost(): ResourceDrop[] { return [{ type: 'wheat', amount: 5 },{ type: 'wood', amount: 5 }]; }
+  
+}
+export class Lumberjack extends Building {
+  getSpriteKey(): string {
+    return 'lumberjack';
+  }
+  produce(): ResourceDrop | null {
+    return { type: 'wood', amount: 1 };
+  }
+  getCost(): ResourceDrop[] { return [{ type: 'wood', amount: 5 }]; }
   
 }
