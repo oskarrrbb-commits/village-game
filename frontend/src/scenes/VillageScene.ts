@@ -23,7 +23,7 @@ export class VillageScene extends Phaser.Scene {
 
   create(): void {
     new GridRenderer(this, this.gridMap).render();
-    const placer = new BuildingPlacer(this, this.village);
+    const placer = new BuildingPlacer(this, this.village, this.gridMap);
     placer.enable();
     const buildMenu = new BuildMenu(this, placer);
     buildMenu.create();
@@ -33,7 +33,7 @@ export class VillageScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
 
     this.edgeScroll = new EdgeScrollCamera(this);
-    new BuildingPlacer(this, this.village).enable();
+    new BuildingPlacer(this, this.village, this.gridMap).enable();
 
     const ResourceText = this.add.text(100, 100, `Wheat: ${this.village.resources.get('wheat')}`);
     ResourceText.setScrollFactor(0);

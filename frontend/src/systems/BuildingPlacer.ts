@@ -2,11 +2,16 @@ import Phaser from 'phaser';
 import { Village } from '../domain/Village';
 import { createBuilding } from '../domain/BuildingRegistry';
 import { TILE_SIZE } from './GridRenderer';
+import type { GridMap } from '../domain/GridMap.ts';
 
 export class BuildingPlacer {
-  private selectedType = ''; 
+  private selectedType = '';
 
-  constructor(private scene: Phaser.Scene, private village: Village) {}
+  constructor(
+    private scene: Phaser.Scene,
+    private village: Village,
+    private gridMap: GridMap
+  ) {}
 
   selectType(key: string): void {
     this.selectedType = key;
@@ -14,27 +19,31 @@ export class BuildingPlacer {
 
   enable(): void {
     this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-    if (!this.selectedType) {
-      return;
-    }
+      if (!this.selectedType) {
+        return;
+      }
       const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
       const gridX = Math.floor(worldPoint.x / TILE_SIZE);
       const gridY = Math.floor(worldPoint.y / TILE_SIZE);
+      const tile = this.gridMap.getTile(gridX, gridY);
 
       if (this.village.getBuildingAt(gridX, gridY)) {
         console.log('Tile already occupied');
         return;
       }
-      const building = createBuilding(this.selectedType, gridX, gridY);
+      if (!tile || tile.type === 'border') {
+        console.log('Cannot place building on border tile');
+        return;
+      }
 
+      const building = createBuilding(this.selectedType, gridX, gridY);
       const cost = building.getCost();
 
       if (!this.village.resources.canAfford(cost)) {
-      console.log('Not enough resources');
-      return;
+        console.log('Not enough resources');
+        return;
       }
       this.village.resources.spend(cost);
-
       this.village.addBuilding(building);
 
       const img = this.scene.add.image(
