@@ -3,11 +3,12 @@ import { Village } from '../domain/Village';
 import { createBuilding } from '../domain/BuildingRegistry';
 import { TILE_SIZE } from './GridRenderer';
 import type { GridMap } from '../domain/GridMap.ts';
+import type { Building } from '../domain/Building';
 
 export class BuildingPlacer {
   private selectedType = '';
   private mode: 'build' | 'delete' = 'build';
-
+  private sprites = new Map<Building, Phaser.GameObjects.Image>();
   constructor(
     private scene: Phaser.Scene,
     private village: Village,
@@ -33,6 +34,9 @@ export class BuildingPlacer {
       if (this.mode === 'delete') {
         const building = this.village.removeBuildingAt(gridX, gridY);
         if (building) {
+          const img = this.sprites.get(building);
+          img?.destroy();
+          this.sprites.delete(building);
           console.log('Building removed');
         }
         return;
@@ -67,6 +71,7 @@ export class BuildingPlacer {
         building.getSpriteKey()
       );
       img.setDisplaySize(TILE_SIZE, TILE_SIZE);
+      this.sprites.set(building, img);
     });
   }
 }
