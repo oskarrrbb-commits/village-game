@@ -34,7 +34,6 @@ export class VillageScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
 
     this.edgeScroll = new EdgeScrollCamera(this);
-    new BuildingPlacer(this, this.village, this.gridMap).enable();
 
     const actionMenu = new ActionMenu(this, placer);
     actionMenu.create();
