@@ -6,6 +6,7 @@ import { loadAllAssets } from '../systems/AssetLoad.ts';
 import { BuildingPlacer } from '../systems/BuildingPlacer';
 import { GridRenderer, TILE_SIZE } from '../systems/GridRenderer';
 import { BuildMenu } from '../systems/BuildMenu.ts';
+import { ActionMenu } from '../systems/ActionMenu.ts';
 
 export class VillageScene extends Phaser.Scene {
   private gridMap = new GridMap(40, 30);
@@ -35,6 +36,9 @@ export class VillageScene extends Phaser.Scene {
     this.edgeScroll = new EdgeScrollCamera(this);
     new BuildingPlacer(this, this.village, this.gridMap).enable();
 
+    const actionMenu = new ActionMenu(this, placer);
+    actionMenu.create();
+    
     const ResourceText = this.add.text(100, 100, `Wheat: ${this.village.resources.get('wheat')}`);
     ResourceText.setScrollFactor(0);
     ResourceText.setDepth(100);

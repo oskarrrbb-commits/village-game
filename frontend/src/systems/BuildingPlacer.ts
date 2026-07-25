@@ -6,6 +6,7 @@ import type { GridMap } from '../domain/GridMap.ts';
 
 export class BuildingPlacer {
   private selectedType = '';
+  private mode: 'build' | 'delete' = 'build';
 
   constructor(
     private scene: Phaser.Scene,
@@ -16,16 +17,30 @@ export class BuildingPlacer {
   selectType(key: string): void {
     this.selectedType = key;
   }
-
+  enterDeleteMode(): void {
+    this.mode = 'delete';
+  }
+  enterBuildMode(): void {
+    this.mode = 'build';
+  }
   enable(): void {
     this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-      if (!this.selectedType) {
-        return;
-      }
       const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
       const gridX = Math.floor(worldPoint.x / TILE_SIZE);
       const gridY = Math.floor(worldPoint.y / TILE_SIZE);
       const tile = this.gridMap.getTile(gridX, gridY);
+
+      if (this.mode === 'delete') {
+        const building = this.village.removeBuildingAt(gridX, gridY);
+        if (building) {
+          console.log('Building removed');
+        }
+        return;
+      }
+
+      if (!this.selectedType) {
+        return;
+      }
 
       if (this.village.getBuildingAt(gridX, gridY)) {
         console.log('Tile already occupied');

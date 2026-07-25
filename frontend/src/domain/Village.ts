@@ -12,7 +12,13 @@ export class Village {
   getBuildingAt(gridX: number, gridY: number): Building | undefined {
     return this.buildings.find(b => b.gridX === gridX && b.gridY === gridY);
   }
-
+  removeBuildingAt(gridX: number, gridY: number): Building | undefined {
+    const building = this.getBuildingAt(gridX, gridY);
+    if (building) {
+      this.buildings = this.buildings.filter(b => b !== building);
+    }
+    return building;
+  }
   tick(): void {
     for (const building of this.buildings) {
       const drop = building.produce();
