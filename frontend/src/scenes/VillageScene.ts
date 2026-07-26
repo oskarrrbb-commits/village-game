@@ -7,6 +7,7 @@ import { BuildingPlacer } from '../systems/BuildingPlacer';
 import { GridRenderer, TILE_SIZE } from '../systems/GridRenderer';
 import { BuildMenu } from '../systems/BuildMenu.ts';
 import { ActionMenu } from '../systems/ActionMenu.ts';
+import { fetchVillage } from '../api/client.ts';
 
 export class VillageScene extends Phaser.Scene {
   private gridMap = new GridMap(40, 30);
@@ -21,8 +22,16 @@ export class VillageScene extends Phaser.Scene {
   preload(): void {
     loadAllAssets(this);
   }
-
+  private async loadInitialVillage(): Promise<void> {
+  try {
+    const dto = await fetchVillage();
+    this.village = Village.fromDTO(dto);
+  } catch (e) {
+    console.log('No saved village found, starting fresh');
+  }
+}
   create(): void {
+    this.loadInitialVillage();
     new GridRenderer(this, this.gridMap).render();
     const placer = new BuildingPlacer(this, this.village, this.gridMap);
     placer.enable();
