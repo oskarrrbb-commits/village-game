@@ -4,7 +4,9 @@ export type ResourceType = 'wheat'|'coal'|'wood';
 
 export class Resources {
   private amounts: Record<string, number> = {};
-
+  getAll(): Record<string, number> {
+  return { ...this.amounts };
+  }
   add(type: string, amount: number): void {
     this.amounts[type] = (this.amounts[type] ?? 0) + amount;
   }
