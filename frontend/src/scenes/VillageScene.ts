@@ -35,7 +35,7 @@ export class VillageScene extends Phaser.Scene {
 
     this.edgeScroll = new EdgeScrollCamera(this);
 
-    const actionMenu = new ActionMenu(this, placer);
+    const actionMenu = new ActionMenu(this, placer, this.village);
     actionMenu.create();
     
     const ResourceText = this.add.text(100, 100, `Wheat: ${this.village.resources.get('wheat')}`);
