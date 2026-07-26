@@ -55,7 +55,7 @@ export class VillageScene extends Phaser.Scene {
     delay: 1000,
     callback: () =>{
     this.village.tick();
-    ResourceText.setText(`Wheat: ${this.village.resources.get('wheat')} \nCoal: ${this.village.resources.get('coal')}\nWood: ${this.village.resources.get('wood')}`);
+    ResourceText.setText(`Wheat: ${Math.floor(this.village.resources.get('wheat'))} \nCoal: ${Math.floor(this.village.resources.get('coal'))}\nWood: ${Math.floor(this.village.resources.get('wood'))}`);
     },
     loop: true,
     });
