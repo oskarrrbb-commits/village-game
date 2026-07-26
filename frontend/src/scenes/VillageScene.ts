@@ -15,9 +15,13 @@ export class VillageScene extends Phaser.Scene {
   private edgeScroll!: EdgeScrollCamera;
 
   constructor() {
-    super('VillageScene');
-    this.village.resources.add('wood', 50);
-  }
+      super('VillageScene');
+      this.village.resources.add('wood', 50);
+      this.village.resources.setBaseCapacity('wheat', 10);
+      this.village.resources.setBaseCapacity('coal', 10);
+      this.village.resources.setBaseCapacity('wood', 10);
+      this.village.resources.setBaseCapacity('population', 10);
+      }
 
   preload(): void {
     loadAllAssets(this);

@@ -48,6 +48,20 @@ export class Village {
     }
     return building;
   }
+  recalculateCapacities(): void {
+  const totals: Record<string, number> = {};
+
+  for (const building of this.buildings) {
+    for (const bonus of building.getStorageBonus()) {
+      totals[bonus.type] = (totals[bonus.type] ?? 0) + bonus.amount;
+    }
+  }
+
+  for (const [type, bonus] of Object.entries(totals)) {
+    const base = this.resources.getBaseCapacity(type);
+    this.resources.setCapacity(type, base + bonus);
+  }
+}
   tick(): void {
     for (const building of this.buildings) {
       const drop = building.produce();

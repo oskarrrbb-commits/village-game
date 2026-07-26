@@ -37,6 +37,7 @@ export class BuildingPlacer {
           const img = this.sprites.get(building);
           img?.destroy();
           this.sprites.delete(building);
+          this.village.recalculateCapacities();
           console.log('Building removed');
         }
         return;
@@ -64,6 +65,7 @@ export class BuildingPlacer {
       }
       this.village.resources.spend(cost);
       this.village.addBuilding(building);
+      this.village.recalculateCapacities();
 
       const img = this.scene.add.image(
         gridX * TILE_SIZE + TILE_SIZE / 2,
