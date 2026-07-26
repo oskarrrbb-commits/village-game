@@ -22,15 +22,16 @@ export class Resources {
   getBaseCapacity(type: string): number {
   return this.baseCapacities[type] ?? 0;
 }
-  private capacities: Record<string, number> = {};
-  setCapacity(type: string, capacity: number): void { this.capacities[type] = capacity; }
 
   private amounts: Record<string, number> = {};
   getAll(): Record<string, number> {
   return { ...this.amounts };
   }
   add(type: string, amount: number): void {
-    this.amounts[type] = (this.amounts[type] ?? 0) + amount;
+    const current = this.get(type);
+    const cap = this.getCapacity(type);
+    this.amounts[type] = Math.min(current + amount, cap);
+    
   }
   get(type: string): number {
     return this.amounts[type] ?? 0;

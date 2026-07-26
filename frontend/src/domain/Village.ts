@@ -57,9 +57,8 @@ export class Village {
     }
   }
 
-  for (const [type, bonus] of Object.entries(totals)) {
-    const base = this.resources.getBaseCapacity(type);
-    this.resources.setCapacity(type, base + bonus);
+  for (const [type, amount] of Object.entries(totals)) {
+    this.resources.setBonusCapacity(type, amount);
   }
 }
   tick(): void {
