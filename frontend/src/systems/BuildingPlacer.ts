@@ -66,7 +66,9 @@ export class BuildingPlacer {
       this.village.resources.spend(cost);
       this.village.addBuilding(building);
       this.village.recalculateCapacities();
-
+      for (const grant of building.produceOnce()) {
+      this.village.resources.add(grant.type, grant.amount);
+      }
       const img = this.scene.add.image(
         gridX * TILE_SIZE + TILE_SIZE / 2,
         gridY * TILE_SIZE + TILE_SIZE / 2,

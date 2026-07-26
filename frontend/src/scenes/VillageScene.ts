@@ -19,7 +19,6 @@ export class VillageScene extends Phaser.Scene {
       this.village.resources.setBaseCapacity('wheat', 10);
       this.village.resources.setBaseCapacity('coal', 10);
       this.village.resources.setBaseCapacity('wood', 10);
-      this.village.resources.setBaseCapacity('population', 10);
       this.village.resources.add('wood', 5);
 
       }
@@ -60,7 +59,7 @@ export class VillageScene extends Phaser.Scene {
     delay: 1000,
     callback: () =>{
     this.village.tick();
-    ResourceText.setText(`Wheat: ${Math.floor(this.village.resources.get('wheat'))}/${Math.floor(this.village.resources.getCapacity('wheat'))} \nCoal: ${Math.floor(this.village.resources.get('coal'))}/${Math.floor(this.village.resources.getCapacity('coal'))} \nWood: ${Math.floor(this.village.resources.get('wood'))}/${Math.floor(this.village.resources.getCapacity('wood'))}`);
+    ResourceText.setText(`Wheat: ${Math.floor(this.village.resources.get('wheat'))}/${Math.floor(this.village.resources.getCapacity('wheat'))} \nCoal: ${Math.floor(this.village.resources.get('coal'))}/${Math.floor(this.village.resources.getCapacity('coal'))} \nWood: ${Math.floor(this.village.resources.get('wood'))}/${Math.floor(this.village.resources.getCapacity('wood'))} \nPopulation: ${Math.floor(this.village.resources.get('population'))}/${Math.floor(this.village.resources.getCapacity('population'))}`);
     },
     loop: true,
     });
