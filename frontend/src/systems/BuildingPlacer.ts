@@ -38,6 +38,7 @@ export class BuildingPlacer {
           img?.destroy();
           this.sprites.delete(building);
           this.village.recalculateCapacities();
+          this.village.resources.clampToCapacity();
           console.log('Building removed');
         }
         return;

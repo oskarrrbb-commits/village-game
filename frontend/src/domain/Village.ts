@@ -49,6 +49,7 @@ export class Village {
     return building;
   }
   recalculateCapacities(): void {
+  this.resources.resetBonusCapacities();
   const totals: Record<string, number> = {};
 
   for (const building of this.buildings) {

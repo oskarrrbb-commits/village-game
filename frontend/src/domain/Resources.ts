@@ -44,4 +44,15 @@ spend(cost: ResourceDrop[]): void {
     this.amounts[c.type] -= c.amount;
   }
 }
+clampToCapacity(): void {
+  for (const type of Object.keys(this.amounts)) {
+    const cap = this.getCapacity(type);
+    if (this.amounts[type] > cap) {
+      this.amounts[type] = cap;
+    }
+  }
+}
+resetBonusCapacities(): void {
+  this.bonusCapacities = {};
+}
 }
