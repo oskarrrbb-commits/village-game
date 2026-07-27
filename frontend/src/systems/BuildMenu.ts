@@ -16,7 +16,7 @@ const MENU_ENTRIES: MenuEntry[] = [
 
 export class BuildMenu {
   constructor(private scene: Phaser.Scene, private placer: BuildingPlacer) {}
-
+  private buttons: Phaser.GameObjects.Text[] = [];
   create(): void {
     
     const startX = 20;
@@ -36,7 +36,20 @@ export class BuildMenu {
       button.on('pointerdown', (_pointer: Phaser.Input.Pointer, _localX: number, _localY: number, event: Phaser.Types.Input.EventData) => {
       this.placer.selectType(entry.buildingKey);
       event.stopPropagation();
-});
+      });
+      this.buttons.push(button);
+
     });
+    
+    this.scene.events.on('modeChanged', (mode: 'build' | 'delete') => {
+      this.setVisible(mode === 'build');
+      });
+      
   }
+  
+  private setVisible(visible: boolean): void {
+  for (const button of this.buttons) {
+    button.setVisible(visible);
+  }
+}
 }
