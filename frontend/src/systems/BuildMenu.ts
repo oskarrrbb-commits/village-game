@@ -19,9 +19,9 @@ export class BuildMenu {
   private buttons: Phaser.GameObjects.Text[] = [];
   create(): void {
     
-    const startX = 20;
-    const startY = 20;
-    const spacing = 40;
+    const startX = 50;
+    const startY = 50;
+    const spacing = 50;
 
     MENU_ENTRIES.forEach((entry, index) => {
       const button = this.scene.add.text(startX, startY + index * spacing, entry.label, {

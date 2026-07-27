@@ -29,8 +29,8 @@ export class ActionMenu {
 
   create(): void {
     const startX = this.scene.scale.width - 120;
-    const startY = 20;
-    const spacing = 40;
+    const startY = 50;
+    const spacing = 50;
 
     ACTION_ENTRIES.forEach((entry, index) => {
       const button = this.scene.add.text(startX, startY + index * spacing, entry.label, {
