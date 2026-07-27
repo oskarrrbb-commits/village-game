@@ -20,9 +20,11 @@ export class BuildingPlacer {
   }
   enterDeleteMode(): void {
     this.mode = 'delete';
+    this.scene.events.emit('modeChanged', this.mode);
   }
   enterBuildMode(): void {
     this.mode = 'build';
+    this.scene.events.emit('modeChanged', this.mode);
   }
   enable(): void {
     this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
