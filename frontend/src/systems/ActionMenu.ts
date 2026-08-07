@@ -10,6 +10,7 @@ interface ActionEntry {
 }
 
 const ACTION_ENTRIES: ActionEntry[] = [
+  { label: 'Rest', onClick: (placer) => placer.enterRestMode() },
   { label: 'Delete', onClick: (placer) => placer.enterDeleteMode() },
   { label: 'Build', onClick: (placer) => placer.enterBuildMode() },
   {

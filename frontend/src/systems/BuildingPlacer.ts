@@ -7,7 +7,7 @@ import type { Building } from '../domain/Building';
 
 export class BuildingPlacer {
   private selectedType = '';
-  private mode: 'build' | 'delete' = 'build';
+  private mode: 'build' | 'delete' | 'rest' = 'rest';
   private sprites = new Map<Building, Phaser.GameObjects.Image>();
   constructor(
     private scene: Phaser.Scene,
@@ -26,13 +26,19 @@ export class BuildingPlacer {
     this.mode = 'build';
     this.scene.events.emit('modeChanged', this.mode);
   }
+  enterRestMode(): void {
+    this.mode = 'rest';
+    this.scene.events.emit('modeChanged', this.mode);
+  }
   enable(): void {
     this.scene.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
       const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
       const gridX = Math.floor(worldPoint.x / TILE_SIZE);
       const gridY = Math.floor(worldPoint.y / TILE_SIZE);
       const tile = this.gridMap.getTile(gridX, gridY);
-
+      if(this.mode === 'rest') {
+        return;
+      }
       if (this.mode === 'delete') {
         const building = this.village.removeBuildingAt(gridX, gridY);
         if (building) {
