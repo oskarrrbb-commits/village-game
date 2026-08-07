@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { BuildingPlacer } from './BuildingPlacer';
 import { Village } from '../domain/Village';
 import { saveVillage } from '../api/client.ts';
+import { ResourceDisplay } from './ResourceDisplay';
 
 interface ActionEntry {
   label: string;
@@ -21,12 +22,13 @@ const ACTION_ENTRIES: ActionEntry[] = [
 ];
 
 export class ActionMenu {
+  private resourceDisplay: ResourceDisplay;
   constructor(
     private scene: Phaser.Scene,
     private placer: BuildingPlacer,
     private village: Village
-  ) {}
-
+  ) {this.resourceDisplay = new ResourceDisplay(scene, village);}
+  
   create(): void {
     const startX = this.scene.scale.width - 120;
     const startY = 50;
@@ -47,5 +49,8 @@ export class ActionMenu {
         event.stopPropagation();
       });
     });
+  }
+  refreshResources(): void {
+    this.resourceDisplay.refresh();
   }
 }

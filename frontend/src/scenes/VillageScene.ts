@@ -8,6 +8,7 @@ import { GridRenderer, TILE_SIZE } from '../systems/GridRenderer';
 import { BuildMenu } from '../systems/BuildMenu.ts';
 import { ActionMenu } from '../systems/ActionMenu.ts';
 import { fetchVillage } from '../api/client.ts';
+import { ResourceDisplay } from '../systems/ResourceDisplay';
 
 export class VillageScene extends Phaser.Scene {
   private gridMap = new GridMap(40, 30);
@@ -51,15 +52,13 @@ export class VillageScene extends Phaser.Scene {
     const actionMenu = new ActionMenu(this, placer, this.village);
     actionMenu.create();
     
-    const ResourceText = this.add.text(100, 300, `Wheat: ${this.village.resources.get('wheat')}`);
-    ResourceText.setScrollFactor(0);
-    ResourceText.setDepth(100);
+    const resourceDisplay = new ResourceDisplay(this, this.village);
 
     this.time.addEvent({
     delay: 1000,
-    callback: () =>{
+    callback: () => {
     this.village.tick();
-    ResourceText.setText(`Wheat: ${Math.floor(this.village.resources.get('wheat'))}/${Math.floor(this.village.resources.getCapacity('wheat'))} \nCoal: ${Math.floor(this.village.resources.get('coal'))}/${Math.floor(this.village.resources.getCapacity('coal'))} \nWood: ${Math.floor(this.village.resources.get('wood'))}/${Math.floor(this.village.resources.getCapacity('wood'))} \nPopulation: ${Math.floor(this.village.resources.get('population'))}/${Math.floor(this.village.resources.getCapacity('population'))}`);
+    resourceDisplay.refresh();
     },
     loop: true,
     });
