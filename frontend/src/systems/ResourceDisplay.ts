@@ -5,7 +5,7 @@ export class ResourceDisplay {
   private text: Phaser.GameObjects.Text;
 
   constructor(scene: Phaser.Scene, private village: Village) {
-    this.text = scene.add.text(100, 300, '', {
+    this.text = scene.add.text(100, 700, '', {
       color: '#ffffff',
       backgroundColor: '#000000',
       padding: { x: 8, y: 4 },
@@ -18,10 +18,10 @@ export class ResourceDisplay {
   refresh(): void {
     const r = this.village.resources;
     this.text.setText(
-      `Wheat: ${Math.floor(r.get('wheat'))}/${Math.floor(r.getCapacity('wheat'))}\n` +
-      `Coal: ${Math.floor(r.get('coal'))}/${Math.floor(r.getCapacity('coal'))}\n` +
-      `Wood: ${Math.floor(r.get('wood'))}/${Math.floor(r.getCapacity('wood'))}\n` +
-      `Population: ${Math.floor(r.get('population'))}/${Math.floor(r.getCapacity('population'))}`
+      ` Wheat: ${Math.floor(r.get('wheat'))}/${Math.floor(r.getCapacity('wheat'))}` +
+      ` Coal: ${Math.floor(r.get('coal'))}/${Math.floor(r.getCapacity('coal'))}` +
+      ` Wood: ${Math.floor(r.get('wood'))}/${Math.floor(r.getCapacity('wood'))}` +
+      ` Population: ${Math.floor(r.get('population'))}/${Math.floor(r.getCapacity('population'))}`
     );
   }
 }
