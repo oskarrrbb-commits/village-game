@@ -2,6 +2,9 @@ import Phaser from 'phaser';
 
 export class EdgeScrollCamera {
   private pointerInside = true;
+  private zoomStep = 0.1;
+  private minZoom = 0.5;
+  private maxZoom = 2;
   constructor(
     private scene: Phaser.Scene,
     private margin: number = 120,
@@ -9,6 +12,11 @@ export class EdgeScrollCamera {
   ) {
     this.scene.input.on('gameout', () => { this.pointerInside = false; });
     this.scene.input.on('gameover', () => { this.pointerInside = true; });
+    this.scene.input.on('wheel', (_pointer: Phaser.Input.Pointer, _gameObjects: unknown, _dx: number, dy: number) => {
+    const cam = this.scene.cameras.main;
+    const newZoom = dy > 0 ? cam.zoom - this.zoomStep : cam.zoom + this.zoomStep;
+    cam.zoom = Phaser.Math.Clamp(newZoom, this.minZoom, this.maxZoom);
+});
   }
 
   update(): void {
