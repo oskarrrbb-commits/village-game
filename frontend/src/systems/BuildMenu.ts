@@ -41,10 +41,10 @@ export class BuildMenu {
 
     });
     
-    this.scene.events.on('modeChanged', (mode: 'build' | 'delete') => {
+    this.scene.events.on('modeChanged', (mode: 'build' | 'delete' | 'rest') => {
       this.setVisible(mode === 'build');
       });
-      
+      this.setVisible(false);
   }
   
   private setVisible(visible: boolean): void {
