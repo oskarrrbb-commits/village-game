@@ -3,8 +3,8 @@ import Phaser from 'phaser';
 export class EdgeScrollCamera {
   private pointerInside = true;
   private zoomStep = 0.1;
-  private minZoom = 0.5;
-  private maxZoom = 2;
+  private minZoom = 0.7;
+  private maxZoom = 1.7;
   constructor(
     private scene: Phaser.Scene,
     private margin: number = 120,
